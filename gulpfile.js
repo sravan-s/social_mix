@@ -9,7 +9,7 @@ gulp.task('copyjs', () => {
     gulp
         .src(paths.scripts)
         .pipe(babel({
-			presets: ['es2015']
-		}))
+            presets: ['es2015']
+        }))
         .pipe(gulp.dest('public/scripts'));
 });
