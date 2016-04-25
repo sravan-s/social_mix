@@ -1,8 +1,3 @@
-class Commander {
-    constructor(){
-    }
-}
-
 class FormModule {
     constructor(formId) {
         this.form = document.getElementById(formId);

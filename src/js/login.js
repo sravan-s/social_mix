@@ -1,4 +1,4 @@
-import {FormModule} from 'common';
+import {FormModule} from './common';
 
 console.log("login");
 
