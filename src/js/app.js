@@ -1,1 +1,1 @@
-import {login} from 'login';
+import {login} from './login';
