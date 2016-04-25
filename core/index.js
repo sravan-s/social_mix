@@ -16,4 +16,3 @@ app.use(router.api);
 app.use(router.common);
 
 module.exports = app;
-    

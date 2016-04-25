@@ -7,7 +7,7 @@ html(lang="en")
         header
             h1 Social
         main
-            form.social-form(name="login-form")
+            form#login-form.social-form(name="login-form")
                 div.form-field
                     label(for="user") Username
                     input#user(type="text")
@@ -15,7 +15,6 @@ html(lang="en")
                     label(for="pass") Password
                     input#pass(type="password")
                 div.btn-wrap
-                    button.btn-def.btn-login Login
+                    button.btn-def.btn-login(type="submit") Login
         footer Ess_Ess
-        script(src="scripts/common.js")
         script(src="scripts/login.js")
