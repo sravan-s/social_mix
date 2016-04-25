@@ -29,6 +29,7 @@
     "eslint-config-airbnb": "^8.0.0",
     "eslint-plugin-import": "^1.5.0",
     "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2"
+    "gulp-babel": "^6.1.2",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
