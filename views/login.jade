@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+    head    
+        title= index
+        meta(charset="utf-8")
+    body
+        header
+            h1 Social
+        main
+            form#login-form.social-form(name="login-form", action="/auth")
+                div.form-field
+                    label(for="user") Username
+                    input#user(type="text")
+                div.form-field
+                    label(for="pass") Password
+                    input#pass(type="password")
+                div.btn-wrap
+                    button.btn-def.btn-login(type="submit") Login
+        footer Ess_Ess
+        script(src="scripts/app.js")
