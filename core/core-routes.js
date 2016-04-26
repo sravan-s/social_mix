@@ -65,10 +65,8 @@ commonRoutes.post('/auth', (req, res) => {
     userMgmt
         .authUser(req.body)
         .then((dat) => {
-            console.log(dat);
             res.send(dat);
         }, (err) => {
-            console.log(err);
             res.send(err);
         });
 });
