@@ -10,7 +10,7 @@ const errors = require('./error-msgs');
 let key = "";
 let userMagmt = {};
 
-// Reads secret key from db 
+// Reads secret key from db
 userMagmt.getAdmin = function () {
     return new promise((fullfill, reject) => {
         models.Admin.findOne((err, dat) => {
@@ -47,7 +47,7 @@ userMagmt.clearData = function (type) {
         });
         return;
     }
-    
+
     //Clears specific data
     for(let i = 0; i < modelTypes.length; i++) {
         if(type == modelTypes[i]) {
@@ -78,12 +78,12 @@ userMagmt.makeAdmin = function (uname, pwd) {
                     });
                 }
             });
-        }    
-    });    
+        }
+    });
 };
 
-// Get user creds
-userMagmt.getUser = function (uname, pwd, type) {
+// authnticates user
+userMagmt.authUser = function (uname, pwd, type) {
     function returnData(err, dat, promiseFullfill, promiseRej) {
         if(err) {
             promiseRej(errors.createErrMsg(false, err));

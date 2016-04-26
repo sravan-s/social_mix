@@ -4,7 +4,8 @@ const adminRouter = express.Router();
 const userRouter = express.Router();
 const APIRouter = express.Router();
 const commonRoutes = express.Router();
-const krypt = require('./crypto');
+const userMgmt = require('./user-mgmt');
+const promise = require('promise');
 
 /**
  * Web routes - Admin
@@ -61,7 +62,19 @@ commonRoutes.get('/admin-login', (req, res) => {
 // Auth is placed here because
 // Auth doesn't need prior authentication
 commonRoutes.post('/auth', (req, res) => {
-    console.log(req);
+    userMgmt
+        .authUser(req.body)
+        .then((dat) => {
+            console.log(dat);
+            res.send(dat);
+        }, (err) => {
+            console.log(err);
+            res.send(err);
+        });
+});
+//Handling invalid routes
+commonRoutes.get('/*', function(req, res) {
+    res.redirect('/login');
 });
 
 module.exports = {
