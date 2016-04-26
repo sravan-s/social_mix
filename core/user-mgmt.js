@@ -83,30 +83,32 @@ userMagmt.makeAdmin = function (uname, pwd) {
 };
 
 // authnticates user
-userMagmt.authUser = function (uname, pwd, type) {
-    function returnData(err, dat, promiseFullfill, promiseRej) {
+userMagmt.authUser = function (dat) {
+    function returnData(err, res, promiseFullfill, promiseRej) {
         if(err) {
             promiseRej(errors.createErrMsg(false, err));
         } else {
             if(!!dat) {
-                dat.uname = krypt.decrypt(dat.uname);
-                dat.pwd = krypt.decrypt(dat.pwd);
-                promiseFullfill(dat);
+                res.uname = krypt.decrypt(res.uname);
+                res.pwd = krypt.decrypt(res.pwd);
+                promiseFullfill(res);
             }
         }
     }
     return new promise((fullfill, reject) => {
-        if(!uname || !pwd) {
+        if(!dat.uname || !dat.pwd) {
             reject(errors.createErrMsg(false, "Username or password missing"));
         } else {
-            if(type == "admin") {
+            if(dat.type == "admin") {
                 models.Admin.findOne((err, dat) => {
                     returnData(err, dat, fullfill, reject);
                 });
-            } else {
+            } else if(dat.type = "user"){
                 models.User.findOne((err, dat) => {
                     returnData(err, dat, fullfill, reject);
                 });
+            } else {
+                reject(errors.createErrMsg(false, "User type missing"));
             }
         }
     });

@@ -41,9 +41,9 @@ App.FormModule.prototype.submitClikHandler = function(e) {
     e.preventDefault();
     let d = {
         uname: "asd",
-        pwd: "asd"
+        pwd: "asd",
+        type: "admin"
     }
-    console.log(this);
     App.AJAX({
         url: this.action,
         callback: function(res) {
