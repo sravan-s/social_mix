@@ -37,7 +37,7 @@ userRouter.get('/user-dash', (req, res) => {
 
 
 /**
- * API routes, atleast 
+ * API routes - (Note: Auth is in common routes)
  */
 APIRouter.post('/', (req, res) => {
     res.send({
@@ -57,6 +57,11 @@ commonRoutes.get('/login', (req, res) => {
 });
 commonRoutes.get('/admin-login', (req, res) => {
     res.render('login.jade');
+});
+// Auth is placed here because
+// Auth doesn't need prior authentication
+commonRoutes.post('/auth', (req, res) => {
+    console.log(req);
 });
 
 module.exports = {

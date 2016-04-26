@@ -1,7 +1,5 @@
-import {FormModule} from './common';
+import {App} from './common';
 
-console.log("login");
-
-var login = new FormModule("login-form");
+var login = new App.FormModule("login-form");
 
 export {login};
