@@ -13,10 +13,15 @@ App.AJAX = function(config) {
     let request = new XMLHttpRequest();
 
     //Request handler
-    request.onreadystatechange = callback
+    request.onreadystatechange = function() {
+        if(request.readyState == 4) {
+            callback(request);
+        }
+    };
 
     //open and send request
     request.open(type, baseUrl + url, true);
+    request.setRequestHeader("Content-type", "application/json");
     request.send(data);
 }
 
@@ -24,15 +29,28 @@ App.AJAX = function(config) {
 App.FormModule = function(formId) {
     let _this = this;
     this.form = document.getElementById(formId);
-    let inputs = this.form.querySelectorAll('input');
-    let submits = this.form.querySelectorAll('[type="submit"]');
-    let action = this.form.getAttribute('action');
-    let submitClikHandler = function(event) {
-        event.preventDefault();
-    };
-    submits.forEach((submit) => {
-        submit.addEventListener('click', submitClikHandler);
+    this.inputs = this.form.querySelectorAll('input');
+    this.submits = this.form.querySelectorAll('[type="submit"]');
+    this.action = this.form.getAttribute('action');
+    for(let i = 0; i < this.submits.length; i++) {
+        this.submits[i].addEventListener('click', _this.submitClikHandler.bind(_this));
+    }
+};
+
+App.FormModule.prototype.submitClikHandler = function(e) {
+    e.preventDefault();
+    let d = {
+        uname: "asd",
+        pwd: "asd"
+    }
+    console.log(this);
+    App.AJAX({
+        url: this.action,
+        callback: function(res) {
+            console.log(res);
+        },
+        data: JSON.stringify(d)
     });
-}
+};
 
 export {App};
