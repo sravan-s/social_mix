@@ -8,7 +8,7 @@ App.AJAX = function(config) {
     let type = config.type || 'POST';
     let url = config.url || '/';
     let baseUrl = config.baseUrl || window.location.origin;
-    let data = JSON.stringify(config.data) || "";
+    let data = config.data || "";
     let callback = config.callback;
     let request = new XMLHttpRequest();
 
@@ -22,7 +22,7 @@ App.AJAX = function(config) {
     //open and send request
     request.open(type, baseUrl + url, true);
     request.setRequestHeader("Content-type", "application/json");
-    request.send(data);
+    request.send(JSON.stringify(data));
 }
 
 //FormClass
@@ -35,12 +35,14 @@ App.FormModule = function(formId) {
 };
 
 //AJAX implementaion for Form
-App.FormModule.prototype.AJAX = function() {
-    let _this = this;
-    App.AJAX({
-        url: _this.action,
-        data: _this.getData()
-    });
+App.FormModule.prototype.AJAX = function(config) {
+    let param = {};
+    param.url = this.action;
+    param.data = this.getData();
+    for(let key in config) {
+        param[key] = config[key];
+    }
+    App.AJAX(param);
 };
 
 App.FormModule.prototype.getData = function() {

@@ -8,7 +8,7 @@ login.submits[0].addEventListener('click', function(e) {
         let data = login.getData();
         data.type = "admin";
         console.log(data);
-        App.AJAX({
+        login.AJAX({
             url: login.action,
             data: data,
             callback: function(res) {
@@ -16,7 +16,6 @@ login.submits[0].addEventListener('click', function(e) {
             }
         });
     }
-    login.AJAX();
 });
 
 export {login};
