@@ -104,8 +104,16 @@ userMagmt.authUser = function (dat) {
                     returnData(err, dat, fullfill, reject);
                 });
             } else if(dat.type = "user"){
-                models.User.findOne((err, dat) => {
-                    returnData(err, dat, fullfill, reject);
+                let query = {
+                    uname: dat.uname,
+                    pwd: dat.pwd
+                };
+                models.User.findOne(query, (err, dat) => {
+                    if(dat) {
+                        returnData(err, dat, fullfill, reject);
+                    } else {
+                        returnData("User not found", dat, fullfill, reject);
+                    }
                 });
             } else {
                 reject(errors.createErrMsg(false, "User type missing"));

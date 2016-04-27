@@ -8,14 +8,14 @@ App.AJAX = function(config) {
     let type = config.type || 'POST';
     let url = config.url || '/';
     let baseUrl = config.baseUrl || window.location.origin;
-    let data = config.data || "";
+    let data = JSON.stringify(config.data) || "";
     let callback = config.callback;
     let request = new XMLHttpRequest();
 
     //Request handler
     request.onreadystatechange = function() {
         if(request.readyState == 4) {
-            callback(request);
+            callback(JSON.parse(request.responseText));
         }
     };
 
@@ -32,25 +32,26 @@ App.FormModule = function(formId) {
     this.inputs = this.form.querySelectorAll('input');
     this.submits = this.form.querySelectorAll('[type="submit"]');
     this.action = this.form.getAttribute('action');
-    for(let i = 0; i < this.submits.length; i++) {
-        this.submits[i].addEventListener('click', _this.submitClikHandler.bind(_this));
-    }
 };
 
-App.FormModule.prototype.submitClikHandler = function(e) {
-    e.preventDefault();
-    let d = {
-        uname: "asd",
-        pwd: "asd",
-        type: "admin"
-    }
+//AJAX implementaion for Form
+App.FormModule.prototype.AJAX = function() {
+    let _this = this;
     App.AJAX({
-        url: this.action,
-        callback: function(res) {
-            console.log(res);
-        },
-        data: JSON.stringify(d)
+        url: _this.action,
+        data: _this.getData()
     });
+};
+
+App.FormModule.prototype.getData = function() {
+    var data = {};
+    for(let i = 0; i < this.inputs.length; i++) {
+        console.log(this.inputs[i].dataset.key);
+        if(!!this.inputs[i].dataset.key) {
+            data[this.inputs[i].dataset.key] = this.inputs[i].value;
+        }
+    }
+    return data;
 };
 
 export {App};

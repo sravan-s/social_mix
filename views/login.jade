@@ -1,6 +1,6 @@
 doctype html
 html(lang="en")
-    head    
+    head
         title= index
         meta(charset="utf-8")
     body
@@ -10,10 +10,10 @@ html(lang="en")
             form#login-form.social-form(name="login-form", action="/auth")
                 div.form-field
                     label(for="user") Username
-                    input#user(type="text")
+                    input#user(type="text", data-key="uname", required)
                 div.form-field
                     label(for="pass") Password
-                    input#pass(type="password")
+                    input#pass(type="password", data-key="pwd", required)
                 div.btn-wrap
                     button.btn-def.btn-login(type="submit") Login
         footer Ess_Ess
